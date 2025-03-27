@@ -49,6 +49,3 @@ npm run dev
 4. View your timer history in the History page
 5. Toggle between light and dark mode using the theme switcher
 
-## License
-
-MIT
