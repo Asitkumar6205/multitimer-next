@@ -3,7 +3,7 @@
 A modern timer application built with Next.js, TypeScript, and Tailwind CSS. Manage multiple timers with categories, track progress, and view completion history.
 
 ## Walkthrough Video
-[![Watch the video](https://www.youtube.com/watch?v=2NjuZ8RVwxk)](https://www.youtube.com/watch?v=2NjuZ8RVwxk)
+[![Watch the video](scs.png)](https://www.youtube.com/watch?v=2NjuZ8RVwxk)
 
 ## Features
 
