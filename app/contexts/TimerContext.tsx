@@ -90,18 +90,24 @@ export function TimerProvider({ children }: { children: React.ReactNode }) {
   const [savedState, setSavedState] = useLocalStorage('timer-state', initialState);
   const [state, dispatch] = useReducer(timerReducer, savedState);
   const intervalRefs = useRef<{ [key: string]: NodeJS.Timeout }>({});
-  const lastUpdateRef = useRef<{ [key: string]: number }>({});
+  const timerRefs = useRef<{ [key: string]: Timer }>({});
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // Save state to localStorage
   useEffect(() => {
     if (isClient) {
       setSavedState(state);
     }
   }, [state, setSavedState, isClient]);
+
+  // Update timer refs when state changes
+  useEffect(() => {
+    state.timers.forEach(timer => {
+      timerRefs.current[timer.id] = timer;
+    });
+  }, [state.timers]);
 
   // Handle timer updates in the background
   useEffect(() => {
@@ -112,38 +118,21 @@ export function TimerProvider({ children }: { children: React.ReactNode }) {
     // Set up new intervals for running timers
     state.timers.forEach((timer) => {
       if (timer.isRunning) {
-        // Calculate elapsed time since last update
-        const now = Date.now();
-        const lastUpdate = lastUpdateRef.current[timer.id] || now;
-        const elapsedSeconds = Math.floor((now - lastUpdate) / 1000);
-        
-        // Update remaining time based on elapsed time
-        if (elapsedSeconds > 0) {
-          dispatch({
-            type: 'UPDATE_TIMER',
-            payload: {
-              ...timer,
-              remainingTime: Math.max(0, timer.remainingTime - elapsedSeconds),
-            },
-          });
-        }
-
-        // Set up new interval
         intervalRefs.current[timer.id] = setInterval(() => {
-          if (timer.remainingTime > 0) {
-            lastUpdateRef.current[timer.id] = Date.now();
+          const currentTimer = timerRefs.current[timer.id];
+          if (currentTimer && currentTimer.remainingTime > 0) {
             dispatch({
               type: 'UPDATE_TIMER',
               payload: {
-                ...timer,
-                remainingTime: timer.remainingTime - 1,
+                ...currentTimer,
+                remainingTime: currentTimer.remainingTime - 1,
               },
             });
-          } else {
+          } else if (currentTimer) {
             dispatch({
               type: 'COMPLETE_TIMER',
               payload: {
-                ...timer,
+                ...currentTimer,
                 completedAt: Date.now(),
               },
             });

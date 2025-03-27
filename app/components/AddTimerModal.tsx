@@ -8,7 +8,7 @@ interface AddTimerModalProps {
   onAdd: (name: string, duration: number, category: string) => void;
 }
 
-const CATEGORIES = ['Work', 'Break', 'Exercise', 'Study'];
+const CATEGORIES = ['Work', 'Break', 'Exercise', 'Study', 'Other'];
 
 const AddTimerModal: React.FC<AddTimerModalProps> = ({
   isOpen,
@@ -76,32 +76,27 @@ const AddTimerModal: React.FC<AddTimerModalProps> = ({
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Category
             </label>
-            <div className="space-y-2">
+            {!showCustomCategory ? (
               <select
                 value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value === 'custom') {
+                    setShowCustomCategory(true);
+                  } else {
+                    setCategory(e.target.value);
+                  }
+                }}
                 className={inputClassName}
-                disabled={showCustomCategory}
               >
                 {CATEGORIES.map((cat) => (
                   <option key={cat} value={cat}>
                     {cat}
                   </option>
                 ))}
+                <option value="custom">Custom Category</option>
               </select>
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="customCategory"
-                  checked={showCustomCategory}
-                  onChange={(e) => setShowCustomCategory(e.target.checked)}
-                  className="rounded border-gray-300 text-blue-500 focus:ring-blue-500"
-                />
-                <label htmlFor="customCategory" className="text-sm text-gray-700 dark:text-gray-300">
-                  Use custom category
-                </label>
-              </div>
-              {showCustomCategory && (
+            ) : (
+              <div className="flex gap-2">
                 <input
                   type="text"
                   value={customCategory}
@@ -110,8 +105,15 @@ const AddTimerModal: React.FC<AddTimerModalProps> = ({
                   placeholder="Enter custom category"
                   required
                 />
-              )}
-            </div>
+                <button
+                  type="button"
+                  onClick={() => setShowCustomCategory(false)}
+                  className="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200"
+                >
+                  ←
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="flex justify-end gap-2 mt-6">

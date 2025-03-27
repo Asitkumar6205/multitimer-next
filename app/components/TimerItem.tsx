@@ -34,10 +34,10 @@ const CATEGORY_COLORS: { [key: string]: { bg: string; text: string; border: stri
     text: 'text-purple-600 dark:text-purple-400',
     border: 'border-purple-200 dark:border-purple-800'
   },
-  Custom: {
-    bg: 'bg-pink-50 dark:bg-pink-900/20',
-    text: 'text-pink-600 dark:text-pink-400',
-    border: 'border-pink-200 dark:border-pink-800'
+  Other: {
+    bg: 'bg-gray-50 dark:bg-gray-900/20',
+    text: 'text-gray-600 dark:text-gray-400',
+    border: 'border-gray-200 dark:border-gray-800'
   }
 };
 
@@ -57,9 +57,8 @@ const TimerItem: React.FC<TimerItemProps> = ({
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
-  // Get category colors - use Custom colors for any category not in the predefined list
-  const isCustomCategory = !['Work', 'Break', 'Exercise', 'Study'].includes(timer.category);
-  const categoryColors = isCustomCategory ? CATEGORY_COLORS.Custom : CATEGORY_COLORS[timer.category] || CATEGORY_COLORS.Work;
+  // Get category colors or default to Other category colors
+  const categoryColors = CATEGORY_COLORS[timer.category] || CATEGORY_COLORS.Other;
 
   return (
     <div className={`p-4 rounded-lg shadow-sm border ${categoryColors.bg} ${categoryColors.border}`}>

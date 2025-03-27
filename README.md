@@ -1,51 +1,39 @@
-# MultiTimer Next.js
-
-A modern timer application built with Next.js, TypeScript, and Tailwind CSS. Manage multiple timers with different categories and track your timer history.
-
-## Features
-
-- Create multiple timers with custom durations
-- Organize timers by categories (Work, Break, Exercise, Study, Custom)
-- Start, pause, reset, and delete timers
-- Visual progress bars for each timer
-- Dark mode support
-- Timer history tracking
-- Responsive design
-- Persistent storage using localStorage
-
-## Tech Stack
-
-- Next.js 14
-- TypeScript
-- Tailwind CSS
-- React Context API
-- Local Storage
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/multitimer-next.git
-```
+First, run the development server:
 
-2. Install dependencies:
-```bash
-cd multitimer-next
-npm install
-```
-
-3. Run the development server:
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Usage
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-1. Click "Add Timer" to create a new timer
-2. Set the timer name, duration, and category
-3. Use the controls to start, pause, reset, or delete timers
-4. View your timer history in the History page
-5. Toggle between light and dark mode using the theme switcher
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+<<<<<<< HEAD
+=======
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+>>>>>>> a2fadd1 (Issue Fixes)
