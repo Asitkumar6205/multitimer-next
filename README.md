@@ -24,7 +24,7 @@ A modern timer application built with Next.js, TypeScript, and Tailwind CSS. Man
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/multitimer-next.git
+https://github.com/Asitkumar6205/multitimer-next.git
 cd multitimer-next
 ```
 
